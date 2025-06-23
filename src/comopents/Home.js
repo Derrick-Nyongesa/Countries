@@ -1,10 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import bgImage from "../assets/lucas-george-wendt-IYm2PCy0f8c-unsplash.jpg";
-import { Box, TextField, Typography, Button } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Typography,
+  Button,
+  Autocomplete,
+} from "@mui/material";
 
 function Home() {
   const [showSearch, setShowSearch] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const navigate = useNavigate();
 
   const handleShowSearch = () => {
     setShowSearch(true);
@@ -12,6 +22,28 @@ function Home() {
 
   const handleHideSearch = () => {
     setShowSearch(false);
+  };
+
+  // Fetch country suggestions
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+      if (inputValue.length < 2) return;
+      try {
+        const res = await axios.get(
+          `https://restcountries.com/v3.1/name/${inputValue}`
+        );
+        setSuggestions(res.data.map((country) => country.name.common).sort());
+      } catch (error) {
+        setSuggestions([]);
+      }
+    };
+    fetchSuggestions();
+  }, [inputValue]);
+
+  const handleSelectCountry = (event, value) => {
+    if (value) {
+      navigate(`/country/${encodeURIComponent(value)}`);
+    }
   };
 
   return (
@@ -64,11 +96,19 @@ function Home() {
           )}
 
           {showSearch && (
-            <TextField
-              fullWidth
-              placeholder="Type a country name..."
-              variant="outlined"
-              autoFocus
+            <Autocomplete
+              freeSolo
+              options={suggestions}
+              onInputChange={(e, val) => setInputValue(val)}
+              onChange={handleSelectCountry}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Type a country name..."
+                  variant="outlined"
+                  autoFocus
+                />
+              )}
             />
           )}
         </Box>

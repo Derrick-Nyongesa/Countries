@@ -1,7 +1,107 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Card,
+  CardContent,
+  Avatar,
+} from "@mui/material";
 
 function Country() {
-  return <div>Country</div>;
+  const { name } = useParams();
+  const [country, setCountry] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchCountry = async () => {
+      try {
+        const res = await axios.get(
+          `https://restcountries.com/v3.1/name/${name}?fullText=true`
+        );
+        setCountry(res.data[0]);
+        setLoading(false);
+      } catch (err) {
+        setError("Country not found");
+        setLoading(false);
+      }
+    };
+    fetchCountry();
+  }, [name]);
+
+  if (loading)
+    return (
+      <Box textAlign="center" mt={10}>
+        <CircularProgress />
+      </Box>
+    );
+
+  if (error)
+    return (
+      <Box textAlign="center" mt={10}>
+        <Typography variant="h6" color="error">
+          {error}
+        </Typography>
+      </Box>
+    );
+
+  return (
+    <Box sx={{ p: 3, maxWidth: 700, mx: "auto" }}>
+      <Card sx={{ p: 2 }}>
+        <CardContent>
+          <Box display="flex" alignItems="center" gap={2}>
+            <Avatar
+              src={country.flags.svg}
+              alt="flag"
+              variant="square"
+              sx={{ width: 80, height: 60 }}
+            />
+            <Typography variant="h4" fontWeight="bold">
+              {country.name.common}
+            </Typography>
+          </Box>
+          <Typography variant="body1" mt={2}>
+            <strong>Official Name:</strong> {country.name.official}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Capital:</strong> {country.capital?.[0] || "N/A"}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Region:</strong> {country.region}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Subregion:</strong> {country.subregion}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Population:</strong> {country.population.toLocaleString()}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Area:</strong> {country.area.toLocaleString()} km²
+          </Typography>
+          <Typography variant="body1">
+            <strong>Languages:</strong>{" "}
+            {country.languages
+              ? Object.values(country.languages).join(", ")
+              : "N/A"}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Currencies:</strong>{" "}
+            {country.currencies
+              ? Object.values(country.currencies)
+                  .map((c) => `${c.name} (${c.symbol})`)
+                  .join(", ")
+              : "N/A"}
+          </Typography>
+          <Typography variant="body1">
+            <strong>Timezones:</strong> {country.timezones.join(", ")}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Box>
+  );
 }
 
 export default Country;
