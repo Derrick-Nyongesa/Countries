@@ -5,8 +5,8 @@ import Country from "./comopents/Country";
 function App() {
   return (
     <>
-      {/* <Home /> */}
-      <Country />
+      <Home />
+      {/* <Country /> */}
     </>
   );
 }

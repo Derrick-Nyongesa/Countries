@@ -48,6 +48,7 @@ function Home() {
             sx={{ color: "#1976d2", fontWeight: "bold" }}
             onClick={handleHideSearch}
             style={{ cursor: "pointer" }}
+            className="fade-in-up"
           >
             Countries Library
           </Typography>
