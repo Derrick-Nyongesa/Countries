@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import {
@@ -11,9 +11,16 @@ import {
   Card,
   CardContent,
   Avatar,
+  Grid,
+  IconButton,
+  Button,
 } from "@mui/material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import PinterestIcon from "@mui/icons-material/Pinterest";
+import MenuIcon from "@mui/icons-material/Menu";
 
-// Fix marker icon issue in Leaflet
+// Fix marker icon issue
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -25,8 +32,10 @@ L.Icon.Default.mergeOptions({
 function Country() {
   const { name } = useParams();
   const [country, setCountry] = useState(null);
+  const [borderData, setBorderData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [geoData, setGeoData] = useState(null);
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -34,10 +43,20 @@ function Country() {
         const res = await axios.get(
           `https://restcountries.com/v3.1/name/${name}?fullText=true`
         );
-        setCountry(res.data[0]);
+        const countryData = res.data[0];
+        setCountry(countryData);
+
+        // Fetch GeoJSON borders using cca3
+        const cca3 = countryData.cca3;
+        const geoRes = await axios.get(
+          `https://raw.githubusercontent.com/johan/world.geo.json/master/countries/${cca3}.geo.json`
+        );
+        setGeoData(geoRes.data);
+
         setLoading(false);
       } catch (err) {
-        setError("Country not found");
+        console.error(err);
+        setError("Country not found or GeoJSON fetch failed");
         setLoading(false);
       }
     };
@@ -114,7 +133,7 @@ function Country() {
           </Typography>
         </CardContent>
       </Card>
-      {/* OpenStreetMap with marker */}
+
       {capitalCoords && (
         <Box mt={3}>
           <Typography variant="h6" mb={1}>
@@ -129,6 +148,9 @@ function Country() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             />
+            {geoData && (
+              <GeoJSON data={geoData} style={{ color: "blue", weight: 2 }} />
+            )}
             <Marker position={capitalCoords}>
               <Popup>{country.capital?.[0] || country.name.common}</Popup>
             </Marker>
