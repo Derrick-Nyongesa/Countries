@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 import {
   Box,
   Typography,
@@ -9,6 +12,15 @@ import {
   CardContent,
   Avatar,
 } from "@mui/material";
+
+// Fix marker icon issue in Leaflet
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.3/dist/images/marker-shadow.png",
+});
 
 function Country() {
   const { name } = useParams();
@@ -47,6 +59,8 @@ function Country() {
         </Typography>
       </Box>
     );
+
+  const capitalCoords = country.capitalInfo?.latlng || country.latlng;
 
   return (
     <Box sx={{ p: 3, maxWidth: 700, mx: "auto" }}>
@@ -100,6 +114,27 @@ function Country() {
           </Typography>
         </CardContent>
       </Card>
+      {/* OpenStreetMap with marker */}
+      {capitalCoords && (
+        <Box mt={3}>
+          <Typography variant="h6" mb={1}>
+            Location Map
+          </Typography>
+          <MapContainer
+            center={capitalCoords}
+            zoom={6}
+            style={{ height: "400px", width: "100%" }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            />
+            <Marker position={capitalCoords}>
+              <Popup>{country.capital?.[0] || country.name.common}</Popup>
+            </Marker>
+          </MapContainer>
+        </Box>
+      )}
     </Box>
   );
 }
