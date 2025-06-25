@@ -82,12 +82,22 @@ function Country() {
   const capitalCoords = country.capitalInfo?.latlng || country.latlng;
 
   return (
-    <Box sx={{ p: 3, maxWidth: 700, mx: "auto" }}>
+    <Box>
+      <Box>
+        <img
+          src={country.flags.svg}
+          alt="Country Flag"
+          style={{
+            width: "100%",
+          }}
+        />
+      </Box>
+
       <Card sx={{ p: 2 }}>
         <CardContent>
           <Box display="flex" alignItems="center" gap={2}>
             <Avatar
-              src={country.flags.svg}
+              src={country.coatOfArms.svg}
               alt="flag"
               variant="square"
               sx={{ width: 80, height: 60 }}
