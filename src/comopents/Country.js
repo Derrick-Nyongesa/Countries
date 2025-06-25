@@ -93,56 +93,52 @@ function Country() {
         />
       </Box>
 
-      <Card sx={{ p: 2 }}>
-        <CardContent>
-          <Box display="flex" alignItems="center" gap={2}>
-            <Avatar
-              src={country.coatOfArms.svg}
-              alt="flag"
-              variant="square"
-              sx={{ width: 80, height: 60 }}
-            />
-            <Typography variant="h4" fontWeight="bold">
-              {country.name.common}
-            </Typography>
-          </Box>
-          <Typography variant="body1" mt={2}>
-            <strong>Official Name:</strong> {country.name.official}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Capital:</strong> {country.capital?.[0] || "N/A"}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Region:</strong> {country.region}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Subregion:</strong> {country.subregion}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Population:</strong> {country.population.toLocaleString()}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Area:</strong> {country.area.toLocaleString()} km²
-          </Typography>
-          <Typography variant="body1">
-            <strong>Languages:</strong>{" "}
-            {country.languages
-              ? Object.values(country.languages).join(", ")
-              : "N/A"}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Currencies:</strong>{" "}
-            {country.currencies
-              ? Object.values(country.currencies)
-                  .map((c) => `${c.name} (${c.symbol})`)
-                  .join(", ")
-              : "N/A"}
-          </Typography>
-          <Typography variant="body1">
-            <strong>Timezones:</strong> {country.timezones.join(", ")}
-          </Typography>
-        </CardContent>
-      </Card>
+      <Box display="flex" alignItems="center" gap={2} px={3} py={2}>
+        <Avatar
+          src={country.coatOfArms.svg}
+          alt="flag"
+          variant="square"
+          sx={{ width: 160, height: 140 }}
+        />
+        <Typography variant="h3" fontWeight="bold">
+          {country.name.common}
+        </Typography>
+      </Box>
+      <Typography variant="body1" mt={2}>
+        <strong>Official Name:</strong> {country.name.official}
+      </Typography>
+      <Typography variant="body1">
+        <strong>Capital:</strong> {country.capital?.[0] || "N/A"}
+      </Typography>
+      <Typography variant="body1">
+        <strong>Region:</strong> {country.region}
+      </Typography>
+      <Typography variant="body1">
+        <strong>Subregion:</strong> {country.subregion}
+      </Typography>
+      <Typography variant="body1">
+        <strong>Population:</strong> {country.population.toLocaleString()}
+      </Typography>
+      <Typography variant="body1">
+        <strong>Area:</strong> {country.area.toLocaleString()} km²
+      </Typography>
+      <Typography variant="body1">
+        <strong>Languages:</strong>{" "}
+        {country.languages
+          ? Object.values(country.languages).join(", ")
+          : "N/A"}
+      </Typography>
+      <Typography variant="body1">
+        <strong>Currencies:</strong>{" "}
+        {country.currencies
+          ? Object.values(country.currencies)
+              .map((c) => `${c.name} (${c.symbol})`)
+              .join(", ")
+          : "N/A"}
+      </Typography>
+      <Typography variant="body1">
+        <strong>Timezones:</strong> {country.timezones.join(", ")}
+      </Typography>
 
       {capitalCoords && (
         <Box mt={3}>
