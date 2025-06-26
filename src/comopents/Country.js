@@ -110,9 +110,9 @@ function Country() {
       <Box px={3} py={2}>
         <Button
           variant="contained"
-          color="primary"
           onClick={() => navigate("/")}
           startIcon={<MenuIcon />}
+          style={{ backgroundColor: "#9a2738", color: "#fff" }}
         >
           Back to Home
         </Button>

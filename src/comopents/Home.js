@@ -80,7 +80,7 @@ function Home() {
             gutterBottom
             sx={{ color: "#1976d2", fontWeight: "bold" }}
             onClick={handleHideSearch}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", color: "#9a2738" }}
           >
             Countries Library
           </Typography>
@@ -89,6 +89,7 @@ function Home() {
               variant="contained"
               onClick={handleShowSearch}
               sx={{ mb: 3, textTransform: "none" }}
+              style={{ backgroundColor: "#9a2738", color: "#fff" }}
             >
               Search for a country
             </Button>
