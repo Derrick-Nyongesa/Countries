@@ -121,6 +121,7 @@ function Country() {
               variant="subtitle1"
               fontStyle="italic"
               color="text.secondary"
+              className="fade-in-up"
             >
               {country.name.official}
             </Typography>
@@ -143,13 +144,15 @@ function Country() {
           <Typography variant="body1">
             <strong>Short Form</strong>
           </Typography>
-          <Typography variant="body1">{country.cioc}</Typography>
+          <Typography variant="body1" className="fade-in-up">
+            {country.cioc}
+          </Typography>
         </Paper>
         <Paper sx={{ p: 2, textAlign: "center" }}>
           <Typography variant="body1">
             <strong>Capital</strong>
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" className="fade-in-up">
             {country.capital?.[0] || "N/A"}
           </Typography>
         </Paper>
@@ -158,7 +161,7 @@ function Country() {
           <Typography variant="body1">
             <strong>Region</strong>
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" className="fade-in-up">
             {country.region} - {country.subregion}
           </Typography>
         </Paper>
@@ -170,7 +173,7 @@ function Country() {
           {country.currencies
             ? Object.entries(country.currencies).map(
                 ([code, { name, symbol }]) => (
-                  <Typography key={code} variant="body1">
+                  <Typography key={code} variant="body1" className="fade-in-up">
                     {code}: {name} ({symbol})
                   </Typography>
                 )
@@ -184,7 +187,7 @@ function Country() {
           </Typography>
           {country.languages
             ? Object.entries(country.languages).map(([key, value]) => (
-                <Typography key={key} variant="body1">
+                <Typography key={key} variant="body1" className="fade-in-up">
                   {value}
                 </Typography>
               ))
@@ -195,7 +198,7 @@ function Country() {
           <Typography variant="body1">
             <strong>Area</strong>
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" className="fade-in-up">
             {country.area.toLocaleString()} km²
           </Typography>
         </Paper>
@@ -204,7 +207,7 @@ function Country() {
           <Typography variant="body1">
             <strong>Population</strong>
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" className="fade-in-up">
             {country.population.toLocaleString()}
           </Typography>
         </Paper>
@@ -213,7 +216,9 @@ function Country() {
           <Typography variant="body1">
             <strong>Timezone</strong>
           </Typography>
-          <Typography variant="body1">{country.timezones}</Typography>
+          <Typography variant="body1" className="fade-in-up">
+            {country.timezones}
+          </Typography>
         </Paper>
 
         <Paper sx={{ p: 2, textAlign: "center" }}>
@@ -222,7 +227,7 @@ function Country() {
           </Typography>
           {country.borders
             ? Object.entries(country.borders).map(([key, value]) => (
-                <Typography key={key} variant="body1">
+                <Typography key={key} variant="body1" className="fade-in-up">
                   {value}
                 </Typography>
               ))
@@ -232,19 +237,23 @@ function Country() {
           <Typography variant="body1">
             <strong>Driving Side</strong>
           </Typography>
-          <Typography variant="body1">{country.car.side}</Typography>
+          <Typography variant="body1" className="fade-in-up">
+            {country.car.side}
+          </Typography>
         </Paper>
         <Paper sx={{ p: 2, textAlign: "center" }}>
           <Typography variant="body1">
             <strong>Start of Week</strong>
           </Typography>
-          <Typography variant="body1">{country.startOfWeek}</Typography>
+          <Typography variant="body1" className="fade-in-up">
+            {country.startOfWeek}
+          </Typography>
         </Paper>
         <Paper sx={{ p: 2, textAlign: "center" }}>
           <Typography variant="body1">
             <strong>Landlocked Country?</strong>
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" className="fade-in-up">
             {country.landlocked ? "Yes" : "No"}
           </Typography>
         </Paper>
