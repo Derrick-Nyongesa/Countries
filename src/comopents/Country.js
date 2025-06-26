@@ -67,8 +67,21 @@ function Country() {
 
   if (loading)
     return (
-      <Box textAlign="center" mt={10}>
-        <CircularProgress />
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#ffffff",
+          zIndex: 9999,
+        }}
+      >
+        <div className="loader" />
       </Box>
     );
 
