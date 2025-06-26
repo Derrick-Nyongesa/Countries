@@ -14,6 +14,7 @@ import {
   Grid,
   IconButton,
   Button,
+  Paper,
 } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -103,58 +104,158 @@ function Country() {
         </Button>
       </Box>
 
-      <Box display="flex" alignItems="center" gap={2} px={3} py={2}>
-        <Avatar
-          src={country.coatOfArms.svg}
-          alt="flag"
-          variant="square"
-          sx={{ width: 160, height: 140 }}
-        />
-        <Typography variant="h3" fontWeight="bold">
-          {country.name.common}
-        </Typography>
+      <Box display="flex" justifyContent="center" alignItems="center">
+        <Box display="flex" alignItems="center" gap={2} px={3} py={2}>
+          <Avatar
+            src={country.coatOfArms.svg}
+            alt="coat of arms"
+            variant="square"
+            sx={{ width: 160, height: 140 }}
+          />
+          <Box>
+            <Typography variant="h3" fontWeight="bold">
+              {country.name.common}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              fontStyle="italic"
+              color="text.secondary"
+            >
+              {country.name.official}
+            </Typography>
+          </Box>
+        </Box>
       </Box>
-      <Typography variant="body1" mt={2}>
-        <strong>Official Name:</strong> {country.name.official}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Capital:</strong> {country.capital?.[0] || "N/A"}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Region:</strong> {country.region}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Subregion:</strong> {country.subregion}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Population:</strong> {country.population.toLocaleString()}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Area:</strong> {country.area.toLocaleString()} km²
-      </Typography>
-      <Typography variant="body1">
-        <strong>Languages:</strong>{" "}
-        {country.languages
-          ? Object.values(country.languages).join(", ")
-          : "N/A"}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Currencies:</strong>{" "}
-        {country.currencies
-          ? Object.values(country.currencies)
-              .map((c) => `${c.name} (${c.symbol})`)
-              .join(", ")
-          : "N/A"}
-      </Typography>
-      <Typography variant="body1">
-        <strong>Timezones:</strong> {country.timezones.join(", ")}
-      </Typography>
+
+      <Box
+        sx={{
+          display: "grid",
+          gap: 2,
+          gridTemplateColumns: {
+            xs: "1fr", // 1 column on extra-small screens
+            sm: "1fr 1fr", // 2 columns on small screens
+            md: "1fr 1fr 1fr 1fr", // 4 columns on medium+ screens
+          },
+        }}
+      >
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Short Form</strong>
+          </Typography>
+          <Typography variant="body1">{country.cioc}</Typography>
+        </Paper>
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Capital</strong>
+          </Typography>
+          <Typography variant="body1">
+            {country.capital?.[0] || "N/A"}
+          </Typography>
+        </Paper>
+
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Region</strong>
+          </Typography>
+          <Typography variant="body1">
+            {country.region} - {country.subregion}
+          </Typography>
+        </Paper>
+
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Currency</strong>
+          </Typography>
+          {country.currencies
+            ? Object.entries(country.currencies).map(
+                ([code, { name, symbol }]) => (
+                  <Typography key={code} variant="body1">
+                    {code}: {name} ({symbol})
+                  </Typography>
+                )
+              )
+            : "N/A"}
+        </Paper>
+
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Languages</strong>
+          </Typography>
+          {country.languages
+            ? Object.entries(country.languages).map(([key, value]) => (
+                <Typography key={key} variant="body1">
+                  {value}
+                </Typography>
+              ))
+            : "N/A"}
+        </Paper>
+
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Area</strong>
+          </Typography>
+          <Typography variant="body1">
+            {country.area.toLocaleString()} km²
+          </Typography>
+        </Paper>
+
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Population</strong>
+          </Typography>
+          <Typography variant="body1">
+            {country.population.toLocaleString()}
+          </Typography>
+        </Paper>
+
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Timezone</strong>
+          </Typography>
+          <Typography variant="body1">{country.timezones}</Typography>
+        </Paper>
+
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Borders</strong>
+          </Typography>
+          {country.borders
+            ? Object.entries(country.borders).map(([key, value]) => (
+                <Typography key={key} variant="body1">
+                  {value}
+                </Typography>
+              ))
+            : "N/A"}
+        </Paper>
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Driving Side</strong>
+          </Typography>
+          <Typography variant="body1">{country.car.side}</Typography>
+        </Paper>
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Start of Week</strong>
+          </Typography>
+          <Typography variant="body1">{country.startOfWeek}</Typography>
+        </Paper>
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1">
+            <strong>Landlocked Country?</strong>
+          </Typography>
+          <Typography variant="body1">
+            {country.landlocked ? "Yes" : "No"}
+          </Typography>
+        </Paper>
+      </Box>
 
       {capitalCoords && (
         <Box mt={3}>
-          <Typography variant="h6" mb={1}>
-            Location Map
-          </Typography>
+          <Box textAlign="center">
+            <Typography variant="body1" mb={1}>
+              <strong>Location Map</strong>
+            </Typography>
+          </Box>
           <MapContainer
             center={capitalCoords}
             zoom={6}
