@@ -154,40 +154,65 @@ function Country() {
         }}
       >
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Short Form</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Short Form
           </Typography>
-          <Typography variant="body1" className="fade-in-up">
-            {country.cioc}
+          <Typography
+            variant="body1"
+            className="fade-in-up"
+            fontWeight="bold"
+            style={{ color: "#9a2738" }}
+          >
+            <strong>{country.cioc}</strong>
           </Typography>
         </Paper>
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Capital</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Capital
           </Typography>
-          <Typography variant="body1" className="fade-in-up">
-            {country.capital?.[0] || "N/A"}
+          <Typography
+            variant="body1"
+            className="fade-in-up"
+            fontWeight="bold"
+            style={{ color: "#9a2738" }}
+          >
+            <strong>{country.capital?.[0] || "N/A"}</strong>
           </Typography>
         </Paper>
 
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Region</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Region
           </Typography>
-          <Typography variant="body1" className="fade-in-up">
-            {country.region} - {country.subregion}
+          <Typography
+            variant="body1"
+            className="fade-in-up"
+            fontWeight="bold"
+            style={{ color: "#9a2738" }}
+          >
+            <strong>
+              {country.region} - {country.subregion}
+            </strong>
           </Typography>
         </Paper>
 
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Currency</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Currency
           </Typography>
           {country.currencies
             ? Object.entries(country.currencies).map(
                 ([code, { name, symbol }]) => (
-                  <Typography key={code} variant="body1" className="fade-in-up">
-                    {code}: {name} ({symbol})
+                  <Typography
+                    key={code}
+                    variant="body1"
+                    className="fade-in-up"
+                    fontWeight="bold"
+                    style={{ color: "#9a2738" }}
+                  >
+                    <strong>
+                      {code}: {name} ({symbol})
+                    </strong>
                   </Typography>
                 )
               )
@@ -195,79 +220,121 @@ function Country() {
         </Paper>
 
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Languages</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Languages
           </Typography>
           {country.languages
             ? Object.entries(country.languages).map(([key, value]) => (
-                <Typography key={key} variant="body1" className="fade-in-up">
-                  {value}
+                <Typography
+                  key={key}
+                  variant="body1"
+                  className="fade-in-up"
+                  fontWeight="bold"
+                  style={{ color: "#9a2738" }}
+                >
+                  <strong>{value}</strong>
                 </Typography>
               ))
             : "N/A"}
         </Paper>
 
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Area</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Area
           </Typography>
-          <Typography variant="body1" className="fade-in-up">
-            {country.area.toLocaleString()} km²
-          </Typography>
-        </Paper>
-
-        <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Population</strong>
-          </Typography>
-          <Typography variant="body1" className="fade-in-up">
-            {country.population.toLocaleString()}
+          <Typography
+            variant="body1"
+            className="fade-in-up"
+            fontWeight="bold"
+            style={{ color: "#9a2738" }}
+          >
+            <strong>{country.area.toLocaleString()} km²</strong>
           </Typography>
         </Paper>
 
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Timezone</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Population
           </Typography>
-          <Typography variant="body1" className="fade-in-up">
-            {country.timezones}
+          <Typography
+            variant="body1"
+            className="fade-in-up"
+            fontWeight="bold"
+            style={{ color: "#9a2738" }}
+          >
+            <strong>{country.population.toLocaleString()}</strong>
           </Typography>
         </Paper>
 
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Borders</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Timezone
+          </Typography>
+          <Typography
+            variant="body1"
+            className="fade-in-up"
+            fontWeight="bold"
+            style={{ color: "#9a2738" }}
+          >
+            <strong>{country.timezones}</strong>
+          </Typography>
+        </Paper>
+
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Borders
           </Typography>
           {country.borders
             ? Object.entries(country.borders).map(([key, value]) => (
-                <Typography key={key} variant="body1" className="fade-in-up">
-                  {value}
+                <Typography
+                  key={key}
+                  variant="body1"
+                  className="fade-in-up"
+                  fontWeight="bold"
+                  style={{ color: "#9a2738" }}
+                >
+                  <strong>{value}</strong>
                 </Typography>
               ))
             : "N/A"}
         </Paper>
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Driving Side</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Driving Side
           </Typography>
-          <Typography variant="body1" className="fade-in-up">
-            {country.car.side}
-          </Typography>
-        </Paper>
-        <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Start of Week</strong>
-          </Typography>
-          <Typography variant="body1" className="fade-in-up">
-            {country.startOfWeek}
+          <Typography
+            variant="body1"
+            className="fade-in-up"
+            fontWeight="bold"
+            style={{ color: "#9a2738" }}
+          >
+            <strong>{country.car.side}</strong>
           </Typography>
         </Paper>
         <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Typography variant="body1">
-            <strong>Landlocked Country?</strong>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Start of Week
           </Typography>
-          <Typography variant="body1" className="fade-in-up">
-            {country.landlocked ? "Yes" : "No"}
+          <Typography
+            variant="body1"
+            className="fade-in-up"
+            fontWeight="bold"
+            style={{ color: "#9a2738" }}
+          >
+            <strong>{country.startOfWeek}</strong>
+          </Typography>
+        </Paper>
+        <Paper sx={{ p: 2, textAlign: "center" }}>
+          <Typography variant="body1" textTransform={"uppercase"}>
+            Landlocked Country?
+          </Typography>
+          <Typography
+            variant="body1"
+            className="fade-in-up"
+            fontWeight="bold"
+            style={{ color: "#9a2738" }}
+          >
+            <strong>{country.landlocked ? "Yes" : "No"}</strong>
           </Typography>
         </Paper>
       </Box>
@@ -275,8 +342,8 @@ function Country() {
       {capitalCoords && (
         <Box mt={3}>
           <Box textAlign="center">
-            <Typography variant="body1" mb={1}>
-              <strong>Location Map</strong>
+            <Typography variant="body1" mb={1} textTransform={"uppercase"}>
+              Location Map
             </Typography>
           </Box>
           <MapContainer
