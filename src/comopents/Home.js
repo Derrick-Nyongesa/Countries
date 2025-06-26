@@ -67,7 +67,6 @@ function Home() {
           sx={{
             width: "100%",
             maxWidth: 500,
-            textAlign: "center",
             p: 3,
             bgcolor: "white",
             borderRadius: 2,
@@ -75,24 +74,44 @@ function Home() {
           }}
         >
           <Typography
-            variant="h2"
+            variant="h5"
             component="h1"
             gutterBottom
             sx={{ color: "#1976d2", fontWeight: "bold" }}
             onClick={handleHideSearch}
-            style={{ cursor: "pointer", color: "#9a2738" }}
+            style={{ cursor: "pointer", color: "#9a2738", textAlign: "center" }}
           >
             Countries Library
           </Typography>
+          <Typography>
+            Retrieve detailed information about any country— borders, flags,
+            populations, currencies, languages, and more.
+          </Typography>
+          <Typography>
+            Perfect for building location-based dashboards, educational apps, or
+            travel guides.
+          </Typography>
           {!showSearch && (
-            <Button
-              variant="contained"
-              onClick={handleShowSearch}
-              sx={{ mb: 3, textTransform: "none" }}
-              style={{ backgroundColor: "#9a2738", color: "#fff" }}
+            <Box
+              sx={{
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+              }}
             >
-              Search for a country
-            </Button>
+              <Button
+                variant="contained"
+                onClick={handleShowSearch}
+                sx={{ mb: 3, textTransform: "none" }}
+                style={{
+                  backgroundColor: "#9a2738",
+                  color: "#fff",
+                  marginTop: "30px",
+                }}
+              >
+                Search for a country
+              </Button>
+            </Box>
           )}
 
           {showSearch && (
