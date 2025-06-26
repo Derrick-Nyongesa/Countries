@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -37,6 +37,7 @@ function Country() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [geoData, setGeoData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -97,7 +98,7 @@ function Country() {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => (window.location.href = "/")}
+          onClick={() => navigate("/")}
           startIcon={<MenuIcon />}
         >
           Back to Home
@@ -110,7 +111,7 @@ function Country() {
             src={country.coatOfArms.svg}
             alt="coat of arms"
             variant="square"
-            sx={{ width: 160, height: 140 }}
+            sx={{ width: 180, height: 180 }}
           />
           <Box>
             <Typography variant="h3" fontWeight="bold">
