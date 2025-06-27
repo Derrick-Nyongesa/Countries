@@ -181,11 +181,31 @@ function Country() {
             variant="body1"
             className="fade-in-up"
             fontWeight="bold"
-            style={{ color: "#9a2738", cursor: "pointer" }}
-            onClick={() => navigate(`/region/${country.region}`)}
+            style={{
+              color: "#9a2738",
+              cursor: "pointer",
+              cursor: "pointer",
+              "&:hover": {
+                color: "#d32f2f",
+              },
+            }}
           >
             <strong>
-              {country.region} - {country.subregion}
+              <span
+                style={{
+                  textDecoration: "underline",
+                }}
+                onClick={() => navigate(`/region/${country.region}`)}
+              >
+                {country.region}
+              </span>{" "}
+              -{" "}
+              <span
+                style={{ textDecoration: "underline" }}
+                onClick={() => navigate(`/subregion/${country.subregion}`)}
+              >
+                {country.subregion}
+              </span>
             </strong>
           </Typography>
         </Paper>

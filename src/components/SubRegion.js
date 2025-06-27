@@ -12,8 +12,8 @@ import {
   Divider,
 } from "@mui/material";
 
-function Region() {
-  const { region } = useParams();
+function SubRegion() {
+  const { subregion } = useParams();
   const [countries, setCountries] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -22,17 +22,17 @@ function Region() {
     const fetchCountriesByRegion = async () => {
       try {
         const response = await axios.get(
-          `https://restcountries.com/v3.1/region/${region}`
+          `https://restcountries.com/v3.1/subregion/${subregion}`
         );
         setCountries(response.data);
       } catch (error) {
-        console.error("Error fetching region data:", error);
+        console.error("Error fetching subregion data:", error);
       } finally {
         setLoading(false);
       }
     };
     fetchCountriesByRegion();
-  }, [region]);
+  }, [subregion]);
 
   if (loading)
     return (
@@ -53,7 +53,6 @@ function Region() {
         <div className="loader" />
       </Box>
     );
-
   return (
     <Box px={3} py={2}>
       <Typography
@@ -61,7 +60,7 @@ function Region() {
         component="h1"
         sx={{ fontWeight: "bold", mb: 2 }}
       >
-        {region}
+        {subregion}
       </Typography>
 
       <List>
@@ -102,4 +101,4 @@ function Region() {
   );
 }
 
-export default Region;
+export default SubRegion;
