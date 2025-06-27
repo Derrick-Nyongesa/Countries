@@ -120,12 +120,19 @@ function Country() {
 
       <Box display="flex" justifyContent="center" alignItems="center">
         <Box display="flex" alignItems="center" gap={2} px={3} py={2}>
-          <Avatar
+          <Box
+            component="img"
             src={country.coatOfArms.svg}
             alt="coat of arms"
-            variant="square"
-            sx={{ width: 180, height: 180 }}
+            sx={{
+              width: 180,
+              height: 180,
+              objectFit: "contain",
+              borderRadius: 1,
+              backgroundColor: "#fff",
+            }}
           />
+
           <Box>
             <Typography variant="h3" fontWeight="bold">
               {country.name.common}
