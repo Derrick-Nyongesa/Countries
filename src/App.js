@@ -1,7 +1,7 @@
 import "./App.css";
-import Home from "./comopents/Home";
-import Country from "./comopents/Country";
-import Region from "./comopents/Region";
+import Home from "./components/Home";
+import Country from "./components/Country";
+import Region from "./components/Region";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
