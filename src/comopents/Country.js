@@ -181,7 +181,8 @@ function Country() {
             variant="body1"
             className="fade-in-up"
             fontWeight="bold"
-            style={{ color: "#9a2738" }}
+            style={{ color: "#9a2738", cursor: "pointer" }}
+            onClick={() => navigate(`/region/${country.region}`)}
           >
             <strong>
               {country.region} - {country.subregion}

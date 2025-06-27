@@ -1,52 +1,78 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Box, Typography, Avatar, Paper } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Avatar,
+  Paper,
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Button,
+} from "@mui/material";
 
 function Region() {
+  const { region } = useParams();
+  const [countries, setCountries] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCountriesByRegion = async () => {
+      try {
+        const response = await axios.get(
+          `https://restcountries.com/v3.1/region/${region}`
+        );
+        setCountries(response.data);
+      } catch (error) {
+        console.error("Error fetching region data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCountriesByRegion();
+  }, [region]);
+
+  if (loading) {
+    return (
+      <Box textAlign="center" mt={10}>
+        <Typography variant="h6">Loading countries in {region}...</Typography>
+      </Box>
+    );
+  }
+
   return (
-    <Box>
-      <Box display="flex" alignItems="center" gap={2} px={3} py={2}>
-        <Typography variant="h4" component="h1" sx={{ fontWeight: "bold" }}>
-          Continent/Region
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "grid",
-          gap: 2,
-          gridTemplateColumns: {
-            xs: "1fr", // 1 column on extra-small screens
-            sm: "1fr 1fr", // 2 columns on small screens
-            md: "1fr 1fr 1fr 1fr", // 4 columns on medium+ screens
-          },
-        }}
+    <Box px={3} py={2}>
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{ fontWeight: "bold", mb: 2 }}
       >
-        <Paper sx={{ p: 2, textAlign: "center" }}>
-          <Avatar
-            src="country flags svg"
-            alt="country flag"
-            variant="square"
-            sx={{ width: 80, height: 60 }}
-          />
-          <Typography
-            variant="body1"
-            className="fade-in-up"
-            fontWeight="bold"
-            style={{ color: "#9a2738" }}
-          >
-            country name common
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            fontStyle="italic"
-            color="text.secondary"
-            className="fade-in-up"
-          >
-            country name official
-          </Typography>
-        </Paper>
-      </Box>
+        {region}
+      </Typography>
+
+      <Grid container spacing={2}>
+        {countries.map((country) => (
+          <Grid item xs={12} sm={6} md={4} key={country.cca3}>
+            <Card
+              onClick={() => navigate(`/country/${country.name.common}`)}
+              sx={{ cursor: "pointer" }}
+            >
+              <CardMedia
+                component="img"
+                height="140"
+                image={country.flags.svg}
+                alt={`Flag of ${country.name.common}`}
+              />
+              <CardContent>
+                <Typography variant="h6">{country.name.common}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 }
