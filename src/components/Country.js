@@ -313,7 +313,17 @@ function Country() {
                   variant="body1"
                   className="fade-in-up"
                   fontWeight="bold"
-                  style={{ color: "#9a2738" }}
+                  style={{
+                    color: "#9a2738",
+                    textDecoration: "underline",
+                    cursor: "pointer",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.color = "#d32f2f";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.color = "#9a2738";
+                  }}
                 >
                   <strong>{value}</strong>
                 </Typography>
