@@ -4,21 +4,7 @@ import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import {
-  Box,
-  Typography,
-  CircularProgress,
-  Card,
-  CardContent,
-  Avatar,
-  Grid,
-  IconButton,
-  Button,
-  Paper,
-} from "@mui/material";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import PinterestIcon from "@mui/icons-material/Pinterest";
+import { Box, Typography, Button, Paper } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 // Fix marker icon issue
