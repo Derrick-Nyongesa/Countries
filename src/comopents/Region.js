@@ -4,13 +4,12 @@ import axios from "axios";
 import {
   Box,
   Typography,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
   Avatar,
-  Paper,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  Button,
+  Divider,
 } from "@mui/material";
 
 function Region() {
@@ -35,13 +34,25 @@ function Region() {
     fetchCountriesByRegion();
   }, [region]);
 
-  if (loading) {
+  if (loading)
     return (
-      <Box textAlign="center" mt={10}>
-        <Typography variant="h6">Loading countries in {region}...</Typography>
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#ffffff",
+          zIndex: 9999,
+        }}
+      >
+        <div className="loader" />
       </Box>
     );
-  }
 
   return (
     <Box px={3} py={2}>
@@ -53,26 +64,27 @@ function Region() {
         {region}
       </Typography>
 
-      <Grid container spacing={2}>
+      <List>
         {countries.map((country) => (
-          <Grid item xs={12} sm={6} md={4} key={country.cca3}>
-            <Card
+          <React.Fragment key={country.cca3}>
+            <ListItem
+              button
               onClick={() => navigate(`/country/${country.name.common}`)}
-              sx={{ cursor: "pointer" }}
             >
-              <CardMedia
-                component="img"
-                height="140"
-                image={country.flags.svg}
-                alt={`Flag of ${country.name.common}`}
-              />
-              <CardContent>
-                <Typography variant="h6">{country.name.common}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+              <ListItemAvatar>
+                <Avatar
+                  variant="square"
+                  src={country.flags.svg}
+                  alt={`Flag of ${country.name.common}`}
+                  sx={{ width: 40, height: 30 }}
+                />
+              </ListItemAvatar>
+              <ListItemText primary={country.name.common} />
+            </ListItem>
+            <Divider />
+          </React.Fragment>
         ))}
-      </Grid>
+      </List>
     </Box>
   );
 }
