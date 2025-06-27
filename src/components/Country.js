@@ -184,14 +184,16 @@ function Country() {
             style={{
               color: "#9a2738",
               cursor: "pointer",
-              cursor: "pointer",
-              "&:hover": {
-                color: "#d32f2f",
-              },
             }}
           >
             <strong>
               <span
+                onMouseEnter={(e) => {
+                  e.target.style.color = "#d32f2f";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = "#9a2738";
+                }}
                 style={{
                   textDecoration: "underline",
                 }}
@@ -201,6 +203,12 @@ function Country() {
               </span>{" "}
               -{" "}
               <span
+                onMouseEnter={(e) => {
+                  e.target.style.color = "#d32f2f";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = "#9a2738";
+                }}
                 style={{ textDecoration: "underline" }}
                 onClick={() => navigate(`/subregion/${country.subregion}`)}
               >
