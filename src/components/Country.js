@@ -307,29 +307,52 @@ function Country() {
             Borders
           </Typography>
           {country.borders
-            ? Object.entries(country.borders).map(([key, value]) => (
+            ? country.borders.map((code) => (
                 <Typography
-                  key={key}
+                  key={code}
                   variant="body1"
                   className="fade-in-up"
                   fontWeight="bold"
-                  style={{
+                  sx={{
                     color: "#9a2738",
                     textDecoration: "underline",
                     cursor: "pointer",
+                    "&:hover": { color: "#d32f2f" },
                   }}
-                  onMouseEnter={(e) => {
-                    e.target.style.color = "#d32f2f";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.color = "#9a2738";
+                  onClick={async () => {
+                    try {
+                      setLoading(true);
+                      const res = await axios.get(
+                        `https://restcountries.com/v3.1/alpha/${code}`
+                      );
+                      const newCountry = res.data[0];
+                      setCountry(newCountry);
+
+                      // Update GeoJSON
+                      const geoRes = await axios.get(
+                        `https://raw.githubusercontent.com/johan/world.geo.json/master/countries/${newCountry.cca3}.geo.json`
+                      );
+                      setGeoData(geoRes.data);
+
+                      // Update URL without reloading
+                      navigate(`/country/${newCountry.name.common}`, {
+                        replace: true,
+                      });
+
+                      setLoading(false);
+                    } catch (err) {
+                      console.error("Failed to load border country:", err);
+                      setError("Failed to load border country");
+                      setLoading(false);
+                    }
                   }}
                 >
-                  <strong>{value}</strong>
+                  <strong>{code}</strong>
                 </Typography>
               ))
             : "N/A"}
         </Paper>
+
         <Paper sx={{ p: 2, textAlign: "center" }}>
           <Typography variant="body1" textTransform={"uppercase"}>
             Driving Side
