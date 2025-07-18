@@ -296,7 +296,7 @@ function Country() {
             variant="body1"
             className="fade-in-up"
             fontWeight="bold"
-            style={{ color: "#9a2738" }}
+            style={{ color: "#9a2738", wordBreak: "break-word" }}
           >
             <strong>{country.timezones}</strong>
           </Typography>
